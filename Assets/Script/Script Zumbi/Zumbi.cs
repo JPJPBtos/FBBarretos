@@ -41,7 +41,7 @@ public class Zumbi : MonoBehaviour {
 	}
 
     private void OnCollisionEnter2D(Collision2D colisao){
-		if(colisao.gameObject.tag == "faca" || colisao.gameObject.tag == "espada")
+		if(colisao.gameObject.tag == "espada")
 		{
 			Destroy(this.gameObject);
 			pontuacao.moedas += 1;

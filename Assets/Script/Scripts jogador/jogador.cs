@@ -9,6 +9,8 @@ public class jogador : MonoBehaviour{
 
     private Rigidbody2D jogadorRb;
     private SpriteRenderer jogadorSr;
+
+    private BoxCollider2D jogadorCollider;
     public float vFrente;
 	public float vTras;
 	
@@ -19,7 +21,9 @@ public class jogador : MonoBehaviour{
 	public GameObject facaPrefab;
 	public GameObject esphitPb;
 	
-    int estanoChao = 1;
+    int estanoChao;
+    bool colisaoParede;
+    
    
     
 
@@ -31,40 +35,92 @@ public class jogador : MonoBehaviour{
 
         jogadorRb = GetComponent<Rigidbody2D>();
         jogadorSr = GetComponent<SpriteRenderer>();
-		
-		estanoChao = 1;
-		
+		jogadorCollider = GetComponent<BoxCollider2D>();
 
+       
+        
 		
     }
 	
 	// Update is called once per frame
 	void Update () {
 	
-		if(BtnTras.pressionando || Input.GetButton("Tras")){
-			andar.Play("Andar");
-			jogadorSr.flipX = false;
-			jogadorRb.velocity = new Vector2(vTras, jogadorRb.velocity.y);
-		}
-		if(!BtnTras.pressionando && !BtnFrente.pressionando){
-			andar.Play("Parado");
-		}
-		if(BtnFrente.pressionando || Input.GetButton("Frente")){
-			andar.Play("Andar");
-			jogadorSr.flipX = true;
-			jogadorRb.velocity = new Vector2(vFrente, jogadorRb.velocity.y);
-		}
+        
+        
+/*
+ if(jogadorSr.flipX == true && BtnTras.pressionando || Input.GetButton("Tras")){
+                    andar.Play("Andar");
+                    jogadorSr.flipX = false;
+                    jogadorRb.velocity = new Vector2(vTras, jogadorRb.velocity.y);
+                    
+                    }else{
+                       
+                        andar.Play("Parado");
+                        jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
+                    }
+            
+            
+            if(jogadorSr.flipX == false && BtnFrente.pressionando || Input.GetButton("Frente")){
+                        andar.Play("Andar");
+                        jogadorSr.flipX = true;
+                        jogadorRb.velocity = new Vector2(vFrente, jogadorRb.velocity.y);
+                    }else{
+                        andar.Play("Parado");
+                        jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
+                    }*/
+		
+		Andar();
 
 		if (Input.GetButtonDown ("Pular")) {
-			Pular ();
+			Pular();
 		}
 		if (Input.GetButtonDown ("Bater")) {
-			Bater ();
+			Bater();
 		}
 		if (Input.GetButtonDown ("Atirar")) {
-			Atirar ();
+			Atirar();
 		}
         
+    }
+
+    public void Andar(){
+        if(colisaoParede == false){
+            if(BtnTras.pressionando || Input.GetButton("Tras")){
+                andar.Play("Andar");
+                jogadorSr.flipX = false;
+                jogadorRb.velocity = new Vector2(vTras, jogadorRb.velocity.y);
+            }else if(BtnFrente.pressionando || Input.GetButton("Frente")){
+                andar.Play("Andar");
+                jogadorSr.flipX = true;
+                jogadorRb.velocity = new Vector2(vFrente, jogadorRb.velocity.y);
+            }else{
+                andar.Play("Parado");
+                jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
+            }
+        }
+        
+        if(colisaoParede == true){
+            switch(jogadorSr.flipX){
+                case true:
+                    if(BtnTras.pressionando || Input.GetButton("Tras")){
+                        andar.Play("Andar");
+                        jogadorSr.flipX = false;
+                        jogadorRb.velocity = new Vector2(vTras, jogadorRb.velocity.y);
+                    }
+                    break;
+                case false:
+                    if(BtnFrente.pressionando || Input.GetButton("Frente")){
+                        andar.Play("Andar");
+                        jogadorSr.flipX = true;
+                        jogadorRb.velocity = new Vector2(vFrente, jogadorRb.velocity.y);
+                    }
+                    break;
+                default:
+                    andar.Play("Parado");
+                    jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
+                    break;
+            }
+        }
     }
 	
 	public void Atirar(){
@@ -95,12 +151,16 @@ public class jogador : MonoBehaviour{
 
     private void OnCollisionEnter2D(Collision2D colisao)
     {
-     
+        
         if (colisao.gameObject.tag == "chao")
-        {
-            
+        {   
             estanoChao = 1;
             andar.Play("Andar");
+        }
+
+        if (colisao.gameObject.tag == "parede")
+        {   
+            colisaoParede = true; 
         }
        
         if (colisao.gameObject.CompareTag("parar"))
@@ -126,7 +186,17 @@ public class jogador : MonoBehaviour{
 
     private void OnCollisionExit2D(Collision2D colisao)
     {
-        estanoChao = 0;
+        if (colisao.gameObject.tag == "chao")
+        {   
+            estanoChao = 0;
+            
+        }
+        if (colisao.gameObject.tag == "parede")
+        {   
+            colisaoParede = false;
+            
+        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D colisao)

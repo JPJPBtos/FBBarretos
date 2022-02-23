@@ -18,11 +18,7 @@ public class moeda : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D colisao)
     {
-        if (colisao.gameObject.tag == "Player")
-        {
-            Debug.Log("asdsa");
-        }
-       
+      
 
     }
 

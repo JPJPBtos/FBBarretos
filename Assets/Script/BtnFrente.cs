@@ -35,6 +35,7 @@ public class BtnFrente : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         pressionando = true;
+        
 
     }
 
