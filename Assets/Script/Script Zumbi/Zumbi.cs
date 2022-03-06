@@ -6,37 +6,30 @@ public class Zumbi : MonoBehaviour {
 
     private Rigidbody2D zumbiRb;
     private SpriteRenderer zumbiSr;
-    public float velocidade;
-    public float velocidadeA;
-    public float maxX;
-    public float minX;
-    private bool andar = true;
+    public float velocidadeDireita;
+    public float velocidadeEsquerda;
+    private bool andarDireita = true;
 	// Use this for initialization
 	void Start () {
 
         zumbiRb = GetComponent<Rigidbody2D>();
         zumbiSr = GetComponent<SpriteRenderer>();
+
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(transform.position.x <= minX)
-        {
-            andar = true;
-        }
-        if(transform.position.x >= maxX)
-        {
-            andar = false;
-        }
-        if (andar == true)
+       
+        if (andarDireita == true)
         {
             zumbiSr.flipX = false;
-            zumbiRb.velocity = new Vector2(velocidade, zumbiRb.velocity.y);
+            zumbiRb.velocity = new Vector2(velocidadeDireita, zumbiRb.velocity.y);
         }
-        if(andar == false)
+        if(andarDireita == false)
         {
             zumbiSr.flipX = true;
-            zumbiRb.velocity = new Vector2(velocidadeA, zumbiRb.velocity.y);
+            zumbiRb.velocity = new Vector2(velocidadeEsquerda, zumbiRb.velocity.y);
         }
 	}
 
@@ -53,7 +46,14 @@ public class Zumbi : MonoBehaviour {
         if (colisao.gameObject.tag == "faca")
         {
             Destroy(this.gameObject);
-            
+        }
+        if (colisao.gameObject.tag == "paredeDireita")
+        {
+            andarDireita = false; 
+        }
+        if (colisao.gameObject.tag == "paredeEsquerda")
+        {
+            andarDireita = true;
         }
 
         

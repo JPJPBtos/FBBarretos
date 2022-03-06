@@ -7,18 +7,28 @@ using UnityEngine.EventSystems;
 public class Faca : MonoBehaviour {
 
 	private Rigidbody2D facaRb;
+	private SpriteRenderer facaSr;
 	
-    public float velocidade;
+    public float velocidadeDireita;
+	public float velocidadeEsquerda;
 	// Use this for initialization
 	void Start () {
 		facaRb = GetComponent<Rigidbody2D>();
-		
+		facaSr = GetComponent<SpriteRenderer>();
+		if (jogador.jogadorSr.flipX==true){	
+			facaSr.flipX = false;
+		    facaRb.velocity = new Vector2(velocidadeDireita, 0);}
+		else
+		{
+			facaSr.flipX =true;
+			facaRb.velocity = new Vector2(velocidadeEsquerda, 0);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		facaRb.velocity = new Vector2(velocidade, 0);
+		
 	
 	}
 	
@@ -29,7 +39,9 @@ public class Faca : MonoBehaviour {
 			jogador.facaN += 1;
             Destroy(this.gameObject);
         }
+    }
 
-		
+	void OnBecameInvisible() {
+        Destroy(this.gameObject);
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class jogador : MonoBehaviour{
 
     private Rigidbody2D jogadorRb;
-    private SpriteRenderer jogadorSr;
+    public static SpriteRenderer jogadorSr;
 
     private BoxCollider2D jogadorCollider;
     public float vFrente;
@@ -36,6 +36,8 @@ public class jogador : MonoBehaviour{
         jogadorRb = GetComponent<Rigidbody2D>();
         jogadorSr = GetComponent<SpriteRenderer>();
 		jogadorCollider = GetComponent<BoxCollider2D>();
+
+        
 
        
         

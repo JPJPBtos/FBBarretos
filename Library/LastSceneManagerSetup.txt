@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Fase.unity
+- path: Assets/Prefab/Scene/Fase.unity
   isLoaded: 1
   isActive: 1
