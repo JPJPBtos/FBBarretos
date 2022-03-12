@@ -146,8 +146,13 @@ public class jogador : MonoBehaviour{
 	
 	public void Bater()
 	{
-		Instantiate (esphitPb, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), transform.localRotation);
-		//espada.Play("espadada");
+        if (jogadorSr.flipX==true)
+        {	
+		    Instantiate (esphitPb, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), transform.localRotation);
+        }else{
+            Instantiate (esphitPb, new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), transform.localRotation);
+        }
+        //espada.Play("espadada");
 		//espada.Play("esp");
 	}
 
@@ -211,5 +216,7 @@ public class jogador : MonoBehaviour{
         if(colisao.gameObject.tag == "facaItem"){
             facaN += 1;
         }
+
+        
     }
 }

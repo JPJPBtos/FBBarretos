@@ -53,7 +53,6 @@
      <Compile Include="Assets\Script\Espada.cs" />
      <Compile Include="Assets\Script\Faca.cs" />
      <Compile Include="Assets\Script\Menu.cs" />
-     <Compile Include="Assets\Script\Reiniciar.cs" />
      <Compile Include="Assets\Script\Script Zumbi\Zumbi.cs" />
      <Compile Include="Assets\Script\Scripts Espinhos\espinhoC.cs" />
      <Compile Include="Assets\Script\Scripts Espinhos\espinhoL.cs" />

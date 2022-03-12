@@ -20,7 +20,7 @@ public class Faca : MonoBehaviour {
 		    facaRb.velocity = new Vector2(velocidadeDireita, 0);}
 		else
 		{
-			facaSr.flipX =true;
+			facaSr.flipX = true;
 			facaRb.velocity = new Vector2(velocidadeEsquerda, 0);
 		}
 	}
