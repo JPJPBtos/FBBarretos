@@ -9,6 +9,7 @@ public class Faca : MonoBehaviour {
 	private Rigidbody2D facaRb;
 	private SpriteRenderer facaSr;
 	
+	
     public float velocidadeDireita;
 	public float velocidadeEsquerda;
 	// Use this for initialization
@@ -17,7 +18,8 @@ public class Faca : MonoBehaviour {
 		facaSr = GetComponent<SpriteRenderer>();
 		if (jogador.jogadorSr.flipX==true){	
 			facaSr.flipX = false;
-		    facaRb.velocity = new Vector2(velocidadeDireita, 0);}
+		    facaRb.velocity = new Vector2(velocidadeDireita, 0);
+		}
 		else
 		{
 			facaSr.flipX = true;
@@ -36,7 +38,7 @@ public class Faca : MonoBehaviour {
     {
         if (colisao.gameObject.tag == "zumbi")
         {
-			jogador.facaN += 1;
+			
             Destroy(this.gameObject);
         }
     }

@@ -43,7 +43,7 @@ public class Zumbi : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D colisao)
     {
-        if (colisao.gameObject.tag == "faca")
+        if (colisao.gameObject.tag == "BalaRifle")
         {
             Destroy(this.gameObject);
         }

@@ -19,7 +19,11 @@ public class jogador : MonoBehaviour{
 	public BoxCollider2D espadaBc; 
 	public static int facaN;
 	public GameObject facaPrefab;
+    public Transform BalaTransform;
 	public GameObject esphitPb;
+    
+
+    
 	
     int estanoChao;
     bool colisaoParede;
@@ -46,39 +50,15 @@ public class jogador : MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
-	
-        
-        
-/*
- if(jogadorSr.flipX == true && BtnTras.pressionando || Input.GetButton("Tras")){
-                    andar.Play("Andar");
-                    jogadorSr.flipX = false;
-                    jogadorRb.velocity = new Vector2(vTras, jogadorRb.velocity.y);
-                    
-                    }else{
-                       
-                        andar.Play("Parado");
-                        jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
-                    }
-            
-            
-            if(jogadorSr.flipX == false && BtnFrente.pressionando || Input.GetButton("Frente")){
-                        andar.Play("Andar");
-                        jogadorSr.flipX = true;
-                        jogadorRb.velocity = new Vector2(vFrente, jogadorRb.velocity.y);
-                    }else{
-                        andar.Play("Parado");
-                        jogadorRb.velocity = new Vector2(0, jogadorRb.velocity.y);
-                    }*/
 		
 		Andar();
 
 		if (Input.GetButtonDown ("Pular")) {
 			Pular();
-		}
+		}/*
 		if (Input.GetButtonDown ("Bater")) {
 			Bater();
-		}
+		}*/
 		if (Input.GetButtonDown ("Atirar")) {
 			Atirar();
 		}
@@ -127,7 +107,8 @@ public class jogador : MonoBehaviour{
 	
 	public void Atirar(){
 		if (facaN >= 1){
-			Instantiate(facaPrefab, transform.position, transform.localRotation);
+			Instantiate(facaPrefab, new Vector2(transform.position.x - (float)0.3, transform.position.y - (float)0.200), 
+            BalaTransform.localRotation);
 			facaN -= 1;
 		}
 	}
@@ -213,7 +194,7 @@ public class jogador : MonoBehaviour{
             SceneManager.LoadScene("GameOver");
         }
 
-        if(colisao.gameObject.tag == "facaItem"){
+        if(colisao.gameObject.tag == "BalaItem"){
             facaN += 1;
         }
 
